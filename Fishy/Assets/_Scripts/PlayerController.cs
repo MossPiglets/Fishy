@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    public float speed = 7.0f;
-    public Rigidbody2D rigidbody2d;
+    [SerializeField] private float speed = 7.0f;
+    private Rigidbody2D rigidbody2d;
     private float horizontal;
     private float vertical;
 
