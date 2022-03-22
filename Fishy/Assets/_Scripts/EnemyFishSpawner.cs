@@ -11,6 +11,7 @@ public class EnemyFishSpawner : MonoBehaviour {
     private float _spawnMin;
     private float _spawnMax;
     private Transform _dynamic;
+    
     void Start() {
         _collider = GetComponent<BoxCollider2D>();
         var bounds = _collider.bounds;

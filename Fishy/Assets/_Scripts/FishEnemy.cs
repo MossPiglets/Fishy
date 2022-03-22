@@ -5,6 +5,6 @@ public class FishEnemy : MonoBehaviour {
 
     void Update()
     {
-        transform.Translate(Vector3.right * Time.deltaTime * Speed);
+        transform.Translate(Time.deltaTime * Speed * Vector3.right);
     }
 }
