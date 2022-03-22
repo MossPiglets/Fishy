@@ -8,7 +8,7 @@ public class Score : MonoBehaviour {
         scoreText.text = "0";
     }
 
-    void Add(int score) {
+    public void Add(int score) {
         scoreValue += score;
         scoreText.text = scoreValue.ToString();
     }
