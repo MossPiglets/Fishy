@@ -1,33 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other) {
-        var playerController = other.GetComponent<PlayerController>();
         Debug.Log("Collision");
-        if (playerController != null) {
-            //you get a world space coord and transfom it to viewport space.
-            Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-
-            //everything from here on is in viewport space where 0,0 is the bottom 
-            //left of your screen and 1,1 the top right.
-            if (pos.x < 0.0f) {
-                pos = new Vector3(1.0f, pos.y, pos.z);
+        if (other.CompareTag("Player")) {
+            var cameraPosition = Camera.main.rect;
+            
+            if (other.gameObject.transform.position.x < cameraPosition.xMin) {
+                Debug.Log(cameraPosition.xMax);
+                Debug.Log(cameraPosition.xMin);
+                other.gameObject.transform.position = new Vector3(cameraPosition.xMax, other.gameObject.transform.position.y);
             }
-            else if (pos.x >= 1.0f) {
-                pos = new Vector3(0.0f, pos.y, pos.z);
+            else if (other.gameObject.transform.position.x >= cameraPosition.xMax) {
+                other.gameObject.transform.position = new Vector3(cameraPosition.xMin, other.gameObject.transform.position.y);
             }
-            if (pos.y < 0.0f) {
-                pos = new Vector3(pos.x, 1.0f, pos.z);
-            }
-            else if (pos.y >= 1.0f) {
-                pos = new Vector3(pos.x, 0.0f, pos.z);
-            }
-
-            //and here it gets transformed back to world space.
-            transform.position = Camera.main.ViewportToWorldPoint(pos);
         }
     }
 }
