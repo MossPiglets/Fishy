@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -5,6 +6,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rigidbody2d;
     private float horizontal;
     private float vertical;
+    private bool facingLeft = true;
 
     void Start() {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -12,6 +14,15 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         horizontal = Input.GetAxis("Horizontal");
+        if (horizontal > 0 && facingLeft) {
+            Flip();
+            facingLeft = false;
+        }
+
+        if (horizontal < 0 && !facingLeft) {
+            Flip();
+            facingLeft = true;
+        }
         vertical = Input.GetAxis("Vertical");
     }
 
@@ -21,5 +32,11 @@ public class PlayerController : MonoBehaviour {
         position.y += speed * vertical * Time.deltaTime;
 
         rigidbody2d.MovePosition(position);
+    }
+
+    void Flip() {
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 }
