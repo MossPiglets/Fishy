@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 671792961}
   - component: {fileID: 671792960}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 1067623002}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
+  rigidbody2d: {fileID: 0}
 --- !u!212 &1067623000
 SpriteRenderer:
   m_ObjectHideFlags: 0
