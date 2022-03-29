@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.FishSizes;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,7 +26,10 @@ public class EnemyFishSpawner : MonoBehaviour {
             var randomEnemyFish = enemyFishPrefabs[Random.Range(0, enemyFishPrefabs.Count - 1)];
             var randomY = Random.Range(_spawnMin, _spawnMax);
             var fish = Instantiate(randomEnemyFish, new Vector3(transform.position.x, randomY, transform.position.z), transform.rotation, _dynamic);
-            fish.GetComponent<FishEnemy>().Speed = Random.Range(1, 4);
+            var fishEnemy = fish.GetComponent<FishEnemy>();
+            fishEnemy.Speed = Random.Range(1, 4);
+            fishEnemy.SetSize(FishSizeSpawnRate.GetRandom());
+            Debug.Log(FishSizeSpawnRate.GetRandom());
             yield return new WaitForSeconds(spawnCooldownSeconds);
         }
     }
