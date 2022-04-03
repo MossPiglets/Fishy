@@ -20,7 +20,8 @@ namespace _Scripts {
                 var enemyFish = otherFish.GetComponent<FishEnemy>();
                 if (enemyFish.Size < this.Size) {
                     enemyFish.Die();
-                    _score.Add((int) Mathf.Pow(2, (float) this.Size));
+                    this.Chomp.Play();
+                    _score.Add((int) Mathf.Pow(2, (float) enemyFish.Size));
                     if (Mathf.Log(_score.ScoreValue, 2) > (double)this.Size) {
                         SetSize(Size + 1);
                     }

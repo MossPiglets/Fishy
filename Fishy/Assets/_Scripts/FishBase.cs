@@ -1,37 +1,51 @@
-using _Scripts;
 using _Scripts.FishSizes;
 using UnityEngine;
 
-public class FishBase : MonoBehaviour {
-    public FishSize Size {
-        get => size;
-    }
+namespace _Scripts {
+    public class FishBase : MonoBehaviour {
+        public FishSize Size {
+            get => size;
+        }
 
-    [SerializeField] private FishSize size = FishSize.S;
-    private Mouth mouth;
+        [SerializeField] private FishSize size = FishSize.S;
+        private Mouth mouth;
+        protected AudioSource Chomp;
+        [SerializeField] protected GameObject deadFish;
 
-    private void Start() {
-        mouth = GetComponentInChildren<Mouth>();
-        if (mouth == null) Debug.LogError("Mouth not found in children");
-        mouth.Eaten += OnFishEat;
-    }
+        private void OnEnable() {
+            mouth = GetComponentInChildren<Mouth>();
+            if (mouth == null) Debug.LogError("Mouth not found in children");
+            mouth.Eaten += OnFishEat;
+            Chomp = GetComponent<AudioSource>();
+        }
 
-    public void SetSize(FishSize newSize) {
-        size = newSize;
-        OnSizeChanged(newSize);
-    }
+        private void OnDisable() {
+            mouth.Eaten -= OnFishEat;
+        }
 
-    private void OnSizeChanged(FishSize newSize) {
-        transform.localScale = newSize.MapToScale();
-    }
+        public void SetSize(FishSize newSize) {
+            Debug.Log(newSize);
+            size = newSize;
+            OnSizeChanged(newSize);
+        }
 
-    protected virtual void OnFishEat(object sender, EatEventArgs args) {}
+        private void OnSizeChanged(FishSize newSize) {
+            transform.localScale = newSize.MapToScale();
+        }
 
-    public virtual void Die() {
-        Destroy(this);
-    }
+        protected virtual void OnFishEat(object sender, EatEventArgs args) {
+            Debug.Log(args.Fish.tag);
+        }
+
+        public virtual void Die() {
+            var dynamic = GameObject.FindWithTag("Dynamic");
+            var corpse = Instantiate(deadFish, transform.position, transform.rotation, dynamic.transform);
+            corpse.transform.localScale = transform.localScale;
+            Destroy(this.gameObject);
+        }
     
-    private void OnValidate() {
-        OnSizeChanged(size);
+        private void OnValidate() {
+            OnSizeChanged(size);
+        }
     }
 }
