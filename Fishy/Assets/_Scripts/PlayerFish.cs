@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Scripts.FishSizes;
+using UnityEngine;
 
 namespace _Scripts {
     public class PlayerFish : FishBase {
@@ -22,7 +23,7 @@ namespace _Scripts {
                     enemyFish.Die();
                     this.Chomp.Play();
                     _score.Add((int) Mathf.Pow(2, (float) enemyFish.Size));
-                    if (Mathf.Log(_score.ScoreValue, 2) > (double)this.Size) {
+                    if (Size != FishSize.Boss && Mathf.Log(_score.ScoreValue, 2) > (double)this.Size) {
                         SetSize(Size + 1);
                     }
                 }
