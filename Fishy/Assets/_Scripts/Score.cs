@@ -3,13 +3,14 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour {
     public Text scoreText;
-    private int scoreValue;
+    public int ScoreValue => _scoreValue;
+    private int _scoreValue;
     void Start() {
         scoreText.text = "0";
     }
 
     public void Add(int score) {
-        scoreValue += score;
-        scoreText.text = scoreValue.ToString();
+        _scoreValue += score;
+        scoreText.text = _scoreValue.ToString();
     }
 }
