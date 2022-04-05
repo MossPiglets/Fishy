@@ -34,7 +34,6 @@ namespace _Scripts {
         }
 
         protected virtual void OnFishEat(object sender, EatEventArgs args) {
-            Debug.Log(args.Fish.tag);
         }
 
         public virtual void Die() {
