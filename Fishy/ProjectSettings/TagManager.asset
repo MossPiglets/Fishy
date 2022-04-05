@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Dynamic
+  - Portal
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - Water
   - UI
   - EnemyFish
-  - 
-  - 
+  - Portal
+  - PlayerCenter
   - 
   - 
   - 
