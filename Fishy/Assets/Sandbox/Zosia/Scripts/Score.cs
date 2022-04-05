@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour {
-    public Text scoreText;
+    private Text scoreText;
     private int scoreValue;
     void Start() {
+        scoreText = GetComponent<Text>();
+        scoreValue = 0;
         scoreText.text = "0";
     }
 
